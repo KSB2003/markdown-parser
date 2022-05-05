@@ -24,6 +24,31 @@ public class MarkdownParse {
         return toReturn;
     }
 
+    public static ArrayList<String> getLinks2(String markdown)  {
+        ArrayList<String> toReturn =  new ArrayList<>();
+        int currentIndex =  0;
+  
+        while(currentIndex <markdown.length()){
+            int openBracket =  markdown.indexOf("[", currentIndex);
+             // System.out.println(openBracket);
+            int closeBracket = markdown.indexOf("]", openBracket);
+            //  System.out.println(closeBracket);
+            //
+            int openParen =  markdown.indexOf(" ");
+            // Syst em.out.println(openParen);
+            //
+            int closeParen =  markdown.indexOf(" ", openParen+1);
+            // System.out.printl n(closeParen);
+            //
+            toReturn.add(markdown.substring(openParen,closeParen));
+            break; //break off
+ //
+        }
+  
+        return toReturn;
+    }
+ 
+
 
 
 
@@ -34,6 +59,15 @@ public class MarkdownParse {
         Path fileName =  Path.of(args[0]);
         String content =  Files.readString(fileName);
         ArrayList<String>  links = getLinks(content); 
+        ArrayList<String>  links2 = getLinks2(content); //کسو
+       if (links.isEmpty() ){
+       }
+       else{
+           for (String x:links2){
+               links.add(x);  //THE MISTAKE IS HERE
+           }
+       }
+
 	    System.out.println(links); 
     } 
 } 
