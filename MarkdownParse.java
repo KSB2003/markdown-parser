@@ -12,11 +12,13 @@ public class MarkdownParse {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
-        while(currentIndex < markdown.length()) {
+        int counter = 0;
+        while(currentIndex < markdown.length() && counter<=2) {
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
+            counter+=1;
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
         }
@@ -67,7 +69,10 @@ public class MarkdownParse {
                links.add(x);  //THE MISTAKE IS HERE
            }
        }
+       ArrayList<String> links3 = new ArrayList<>();
+       links3.add(links.get(0));
+       links3.add(links.get(1));
 
-	    System.out.println(links); 
+	    System.out.println(links3); 
     } 
 } 
